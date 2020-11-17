@@ -24,6 +24,7 @@ group :development do
   end
 
   gem 'rubocop', '~> 1.3'
+  gem 'rugged', '~> 1.0'
   gem 'sys-proc', '~> 1.1', '>= 1.1.2'
   # repl ---------------------------------
   gem 'interesting_methods', '~> 0.1'
