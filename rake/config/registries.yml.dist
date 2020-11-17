@@ -1,0 +1,16 @@
+# vim: ft=yaml
+
+# sample of use:
+#
+# ```sh
+# rake build registry=docker_hub
+# rake build registry=local
+# ```
+---
+local: NULL
+docker_hub: swagdevops
+gitlab_example: gitlab.example.com:5555/project/image
+
+# Local Variables:
+# mode: YAML
+# End:
