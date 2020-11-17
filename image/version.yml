@@ -1,0 +1,8 @@
+---
+from: 'debian:stable-20201012-slim'
+major: 0
+minor: 0
+patch: 1
+maintainer: 'Dimitri Arrigoni'
+email: 'dimitri@arrigoni.me'
+homepage: 'https://github.com/SwagDevOps/image-aldine'

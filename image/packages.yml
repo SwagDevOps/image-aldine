@@ -1,0 +1,18 @@
+---
+apt:
+  - tex-common
+  - lmodern
+  - texlive-fonts-recommended
+  - texlive-latex-extra
+  - texlive-lang-french
+  - texlive-extra-utils
+  - imagemagick
+  - librsvg2-bin
+  - libxml2
+  - librsvg2-2
+  - less
+  - rake
+  - rsync
+  - ruby
+  - inotify-tools
+  - pandoc
