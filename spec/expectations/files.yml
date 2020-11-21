@@ -1,0 +1,28 @@
+---
+/etc/bash/bashrc.sh:
+  md5sum: '2927b097c9e19f07d5ac372994b10b32'
+  is:
+    file:
+    owned_by: [ 'root' ]
+    grouped_into: [ 'root' ]
+    mode: [ 644 ]
+/etc/bash.bashrc:
+  md5sum: '2927b097c9e19f07d5ac372994b10b32'
+  is:
+    symlink:
+    linked_to: [ 'bash/bashrc.sh' ]
+    owned_by: [ 'root' ]
+    grouped_into: [ 'root' ]
+/etc/ImageMagick-7:
+  is:
+    directory:
+    owned_by: [ 'root' ]
+    grouped_into: [ 'root' ]
+    mode: [ 755 ]
+/etc/ImageMagick-7/policy.xml:
+  md5sum: 'd2f6cc31d72d6f3263c5c2201af74ec8'
+  is:
+    file:
+    owned_by: [ 'root' ]
+    grouped_into: [ 'root' ]
+    mode: [ 644 ]

@@ -1,0 +1,54 @@
+---
+/usr/bin/makeindex:
+  is:
+    file:
+    executable:
+    owned_by: [ 'root' ]
+    grouped_into: [ 'root' ]
+    mode: [ 755 ]
+  version:
+    command: "echo 'exit' | %<executable>s 2>&1"
+    matcher: '^This is makeindex, version 2\.15 .*'
+/usr/bin/pdflatex:
+  is:
+    file:
+    executable:
+    owned_by: [ 'root' ]
+    grouped_into: [ 'root' ]
+    linked_to: [ 'pdftex' ]
+  version:
+    matcher: '^pdfTeX 3\..* \(TeX Live 2019.*$'
+/usr/bin/rake:
+  is:
+    file:
+    executable:
+    owned_by: [ 'root' ]
+    grouped_into: [ 'root' ]
+    mode: [ 755 ]
+  version:
+    matcher: '^rake, version 12\.3\.1$'
+/usr/bin/convert:
+  is:
+    file:
+    executable:
+    owned_by: [ 'root' ]
+    grouped_into: [ 'root' ]
+    linked_to: [ 'magick' ]
+/usr/bin/magick:
+  is:
+    file:
+    executable:
+    owned_by: [ 'root' ]
+    grouped_into: [ 'root' ]
+    mode: [ 755 ]
+  version:
+    matcher: '^Version: ImageMagick 7\.0\.10-38 .*'
+/usr/bin/rsvg-convert:
+  is:
+    file:
+    executable:
+    owned_by: [ 'root' ]
+    grouped_into: [ 'root' ]
+    mode: [ 755 ]
+  version:
+    matcher: '^rsvg-convert version 2\.44\.10$'
