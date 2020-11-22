@@ -11,3 +11,4 @@
 !/image/files/etc/skel/.config
 !/rake/config/*.dist
 !/ssh/README.md
+!/**/*.dist
