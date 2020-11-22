@@ -11,7 +11,7 @@ autoload(:Shellwords, 'shellwords');
 ?>
 
 # build ImageMagick ----------------------------------------------------
-FROM #{quote(@from)} AS magick
+FROM #{@from} AS magick
 <?rb
 config = {
   workdir: '/tmp',
@@ -29,8 +29,7 @@ RUN set -eux ;\
     #{APT_UPDATE} ;\
     #{APT_INSTALL} wget tar xz-utils ;\
     # download archive -------------------------------------------------
-    wget \
-         '#{config.fetch(:baseurl)}/ImageMagick-#{config.fetch(:version)}.tar.xz' \
+    wget '#{config.fetch(:baseurl)}/ImageMagick-#{config.fetch(:version)}.tar.xz' \
          --no-check-certificate \
          -nv --show-progress --progress=bar:force:noscroll \
          -O '#{config.fetch(:archive)}' ;\
@@ -60,7 +59,7 @@ RUN set -eux ;\
 <?rb config = nil ?>
 
 # concrete image -------------------------------------------------------
-FROM #{quote(@from)}
+FROM #{@from}
 
 LABEL maintainer=#{quote('%s <%s>' % [@maintainer, @email])} \
       org.label-schema.name=#{quote(@image.name)} \
@@ -88,15 +87,10 @@ COPY --from=magick /build /
 COPY files/ /
 
 RUN set -eux ;\
-    # tests ------------------------------------------------------------
-    which makeindex >/dev/null 2>&1 ;\
-    which pdflatex >/dev/null 2>&1 ;\
-    which rake >/dev/null 2>&1 ;\
-    which convert >/dev/null 2>&1 ;\
-    which magick >/dev/null 2>&1 ;\
-    which rsvg-convert >/dev/null 2>&1 ;\
-    # banner -----------------------------------------------------------
-    pdflatex --version
+    # set access -------------------------------------------------------
+    chmod 644 /etc/bash/bashrc.sh ;\
+    chmod 755 /etc/ImageMagick-*/ ;\
+    chmod 644 /etc/ImageMagick-*/*.xml
 
 # Local Variables:
 # mode: Dockerfile
