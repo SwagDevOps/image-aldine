@@ -1,26 +1,17 @@
 # frozen_string_literal: true
 
-'serverspec'.tap do |gem|
-  # noinspection RubyResolve
-  require gem
-
-  # noinspection RubyResolve
-  if Gem::Specification.find_all_by_name('sys-proc').any?
-    require 'sys/proc'
-
-    Sys::Proc.progname = gem
-  end
-end
+# Sample of execution:
+#
+# ```sh
+# bundle exec rspec -p10 --format d
+# ```
 
 # noinspection RubyResolve
 require 'rbconfig'
-
-# @formatter:off
 # noinspection RubyResolve
-# noinspection RubyLiteralArrayInspection
-[
-  :image,
-  :methods,
-  :configure,
-].each { |fname| require("#{__FILE__.gsub(/\.rb$/, '')}/#{fname}") }
-# @formatter:on
+require 'serverspec'
+
+ENV['progname'] ||= 'serverspec'
+# noinspection RubyResolve
+%w[env image methods configure]
+  .each { |fname| require("#{__FILE__.gsub(/\.rb$/, '')}/#{fname}") }
