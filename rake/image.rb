@@ -6,11 +6,9 @@ require 'kamaze/docker_image'
 autoload(:YAML, 'yaml')
 
 Kamaze::DockerImage.new do |config|
-  config.version = Kamaze::Version.new('image/version.yml').freeze
   config.path = 'image'
+  config.version = Kamaze::Version.new("#{config.path}/version.yml").freeze
   config.verbose = false
-  # @formatter:off
-  config.ssh = nil
   config.name = [
     lambda do
       Pathname.new(__dir__).join('config/registries.yml').tap do |file|
@@ -31,19 +29,16 @@ Kamaze::DockerImage.new do |config|
     stop: nil,
     start: nil,
   }.tap { |commands| config.commands.merge!(commands) }
-  # @formatter:on
+
   config.tasks_load = !self.respond_to?(:image)
 end.tap do |image|
-  # noinspection RubyBlockToMethodReference
-  singleton_class.__send__(:define_method, :image) { image }
+  self.singleton_class.__send__(:define_method, :image) { image }
 
-  image.singleton_class.__send__(:define_method, :dockerfile) do
-    Pathname.new("#{image.path}/Dockerfile")
-  end
+  image.singleton_class.tap do |image_class|
+    image_class.__send__(:define_method, :dockerfile) { Pathname.new("#{image.path}/Dockerfile") }
 
-  unless ['Vendorfile.rb', 'Vendorfile'].map { |f| image.path.join(f) }.keep_if(&:file?).empty?
-    image.singleton_class.__send__(:define_method, :vendor) do
-      Pathname.new("#{image.path}/build/vendor")
+    unless %w[Vendorfile.rb Vendorfile].map { |f| image.path.join(f) }.keep_if(&:file?).empty?
+      image_class.__send__(:define_method, :vendor) { Pathname.new("#{image.path}/build/vendor") }
     end
   end
 end
