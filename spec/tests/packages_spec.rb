@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-self.expectations.fetch(:packages).tap do |packages|
+spec.expectations.tap do |packages|
   # @note This spec was using ``command("/sbin/apk info -e #{package}")``
   #        with ``its(:stdout) { should match(/^#{package}$/) }``
   #        ATM it use ``be_installed`` matcher

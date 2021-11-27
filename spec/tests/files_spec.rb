@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # COPY files/ /
-self.expectations.fetch(spec.to_sym).tap do |files|
+spec.expectations.tap do |files|
   describe(*spec.to_a) do
     files.each do |fp, expectations|
       describe file(fp) do
