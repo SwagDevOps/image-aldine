@@ -1,5 +1,5 @@
 ---
-from: 'debian:stable-20201012-slim'
+from: 'debian:stable-20211115-slim'
 major: 0
 minor: 0
 patch: 1
