@@ -3,7 +3,7 @@
 # Sample of execution:
 #
 # ```sh
-# bundle exec rspec -p10 --format d
+# bundle exec rspec -p10 --format=d
 # ```
 
 # noinspection RubyResolve
@@ -13,5 +13,6 @@ require 'serverspec'
 
 ENV['progname'] ||= 'serverspec'
 # noinspection RubyResolve
-%w[env image methods configure]
-  .each { |fname| require("#{__FILE__.gsub(/\.rb$/, '')}/#{fname}") }
+%w[env image methods configure].each do |fname|
+  require("#{__FILE__.gsub(/\.rb$/, '')}/#{fname}")
+end
