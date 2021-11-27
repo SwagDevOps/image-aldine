@@ -1,10 +1,47 @@
 # frozen_string_literal: true
 
 autoload(:Pathname, 'pathname')
+autoload(:YAML, 'yaml')
 
 EXPECTATIONS_PATH = Pathname.new(__dir__).join('..', 'expectations').expand_path.to_s.freeze
-EXPECTATIONS_KEYS = Dir.glob("#{EXPECTATIONS_PATH}/*.yml")
-                       .map { |fp| Pathname.new(fp).basename('.*').to_s.to_sym }.freeze
+
+expectations = Class.new do
+  def keys
+    files.map { |f| f.basename('.*').to_s.to_sym }.freeze
+  end
+
+  # @return [Hash{Symbol => Object}]
+  def items
+    keys.map { |key| [key, "#{key}.yml"] }.sort.to_h.yield_self do |values|
+      values.transform_values { |fp| yaml.call(fp).freeze }
+    end
+  end
+
+  protected
+
+  def path
+    Pathname.new(EXPECTATIONS_PATH)
+  end
+
+  # @return [Array<Pathname>]
+  def files
+    Pathname.glob("#{path}/*.yml")
+  end
+
+  # @return [Proc]
+  def yaml
+    lambda do |fp|
+      path.join(fp).read.yield_self { |c| YAML.safe_load(c) }
+    end
+  end
+end.new
+
+# @!method expectations()
+#   Get expectations stored in ``expectations`` directory as YAML files.
+#   @return [Hash{Object}]
+self.singleton_class.__send__(:define_method, :expectations) do
+  expectations.items
+end
 
 # @!method spec()
 #   Get a description of current spec file.
@@ -20,22 +57,9 @@ self.singleton_class.__send__(:define_method, :spec) do
         klass.__send__(:define_method, :to_a) { [desc].concat(keywords) }
         klass.__send__(:define_method, :to_s) { desc.to_s }
         klass.__send__(:define_method, :to_sym) { desc.gsub(/\s+/, '_').to_sym }
+        # add expectations on spec --------------------------------------------
+        klass.__send__(:define_method, :expectations) { expectations.items.fetch(self.to_sym, nil) }
       end
     end
-  end
-end
-
-# @!method expectations()
-#   Get expectations stored in ``expectations`` directory as YAML files.
-#   @return [Hash{Object}]
-lambda do |fp|
-  autoload(:YAML, 'yaml')
-  Pathname.new(EXPECTATIONS_PATH).join(fp).read.yield_self { |c| YAML.safe_load(c) }
-end.yield_self do |yaml|
-  self.singleton_class.__send__(:define_method, :expectations) do
-    EXPECTATIONS_KEYS.map { |key| [key, "#{key}.yml"] }
-                     .sort
-                     .to_h
-                     .transform_values { |fp| yaml.call(fp).freeze }
   end
 end
