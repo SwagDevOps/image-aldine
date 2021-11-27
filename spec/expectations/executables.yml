@@ -17,7 +17,8 @@
     grouped_into: [ 'root' ]
     linked_to: [ 'pdftex' ]
   version:
-    matcher: '^pdfTeX 3\..* \(TeX Live 2019.*$'
+    command: "%<executable>s 2>&1 | head -1"
+    matcher: 'Version\s+3\..* \(TeX Live 20[0-9]+'
 /usr/bin/rake:
   is:
     file:
@@ -26,7 +27,7 @@
     grouped_into: [ 'root' ]
     mode: [ 755 ]
   version:
-    matcher: '^rake, version 12\.3\.1$'
+    matcher: '^rake, version 13\.0\.3$'
 /usr/bin/convert:
   is:
     file:
@@ -51,4 +52,4 @@
     grouped_into: [ 'root' ]
     mode: [ 755 ]
   version:
-    matcher: '^rsvg-convert version 2\.44\.10$'
+    matcher: '^rsvg-convert version 2\.50\.3$'
