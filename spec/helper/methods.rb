@@ -2,6 +2,10 @@
 
 autoload(:Pathname, 'pathname')
 
+EXPECTATIONS_PATH = Pathname.new(__dir__).join('..', 'expectations').expand_path.to_s.freeze
+EXPECTATIONS_KEYS = Dir.glob("#{EXPECTATIONS_PATH}/*.yml")
+                       .map { |fp| Pathname.new(fp).basename('.*').to_s.to_sym }.freeze
+
 # @!method spec()
 #   Get a description of current spec file.
 #   @return [Struct]
@@ -15,7 +19,7 @@ self.singleton_class.__send__(:define_method, :spec) do
       instance.singleton_class.tap do |klass|
         klass.__send__(:define_method, :to_a) { [desc].concat(keywords) }
         klass.__send__(:define_method, :to_s) { desc.to_s }
-        klass.__send__(:define_method, :to_sym) { desc.to_sym }
+        klass.__send__(:define_method, :to_sym) { desc.gsub(/\s+/, '_').to_sym }
       end
     end
   end
@@ -24,21 +28,14 @@ end
 # @!method expectations()
 #   Get expectations stored in ``expectations`` directory as YAML files.
 #   @return [Hash{Object}]
-lambda do |fp, path: Pathname.new(__dir__).join('..', 'expectations').expand_path.to_s|
+lambda do |fp|
   autoload(:YAML, 'yaml')
-
-  Pathname.new(path).join(fp).read.yield_self { |c| YAML.safe_load(c) }
+  Pathname.new(EXPECTATIONS_PATH).join(fp).read.yield_self { |c| YAML.safe_load(c) }
 end.yield_self do |yaml|
   self.singleton_class.__send__(:define_method, :expectations) do
-    {}.tap do |expectations|
-      {
-        packages: nil,
-        files: nil,
-        env: nil,
-        executables: nil,
-      }.sort
-        .map { |k, v| [k, v || "#{k}.yml"] }.to_h
-        .each { |k, fp| expectations[k] = yaml.call(fp).freeze }
-    end
+    EXPECTATIONS_KEYS.map { |key| [key, "#{key}.yml"] }
+                     .sort
+                     .to_h
+                     .transform_values { |fp| yaml.call(fp).freeze }
   end
 end
