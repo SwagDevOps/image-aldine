@@ -2,7 +2,7 @@
 
 spec.expectations.sort.map { |k, v| [k.to_s.freeze, v.to_s.freeze] }.to_h.freeze.tap do |expectations|
   describe(*spec.to_a) do
-    # Produce an extract of shell variables values limited to searched varaibles (indexes).
+    # Produce an extract of shell variables values limited to searched variables (indexes).
     #
     # Empty values are nullified.
     let(:env) do
