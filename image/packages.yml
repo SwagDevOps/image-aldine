@@ -1,5 +1,6 @@
 ---
 apt:
+  - cairosvg
   - tex-common
   - lmodern
   - texlive-fonts-recommended
