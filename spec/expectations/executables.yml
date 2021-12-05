@@ -53,3 +53,23 @@
     mode: [ 755 ]
   version:
     matcher: '^rsvg-convert version 2\.50\.3$'
+/usr/bin/cairosvg:
+  is:
+    file:
+    executable:
+    owned_by: [ 'root' ]
+    grouped_into: [ 'root' ]
+    mode: [ 755 ]
+  version:
+    command: "%<executable>s --version"
+    matcher: '^2\.5\.0$'
+/usr/bin/inotifywait:
+  is:
+    file:
+    executable:
+    owned_by: [ 'root' ]
+    grouped_into: [ 'root' ]
+    mode: [ 755 ]
+  version:
+    command: "%<executable>s --help | head -1"
+    matcher: '^inotifywait 3\.14$'
