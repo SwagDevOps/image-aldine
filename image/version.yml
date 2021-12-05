@@ -1,3 +1,4 @@
+# @see https://hub.docker.com/_/debian?tab=tags
 ---
 from: 'debian:stable-20211115-slim'
 major: 0
