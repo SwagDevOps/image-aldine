@@ -26,3 +26,10 @@
     owned_by: [ 'root' ]
     grouped_into: [ 'root' ]
     mode: [ 644 ]
+/etc/ImageMagick-7/delegates.xml:
+  md5sum: '1fe2ad9c47f9c775c8cda5035fff4d5d'
+  is:
+    file:
+    owned_by: [ 'root' ]
+    grouped_into: [ 'root' ]
+    mode: [ 644 ]
