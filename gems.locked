@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/SwagDevOps/kamaze-docker_image.git
-  revision: c70398353b1abe44252b6c54696eaac3689b626f
+  revision: 9507991ccc0029b029be87760593ec6cbf7c7854
   branch: develop
   specs:
-    kamaze-docker_image (0.0.4)
+    kamaze-docker_image (0.0.6)
       cliver (~> 0.3)
       kamaze-version (~> 1.0)
 
@@ -35,7 +35,7 @@ GEM
       excon (>= 0.47.0)
       multi_json
     dotenv (2.7.6)
-    dry-inflector (0.2.0)
+    dry-inflector (0.3.0)
     excon (0.78.0)
     interesting_methods (0.1.2)
     kamaze-version (1.0.2)
