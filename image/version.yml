@@ -1,6 +1,6 @@
 # @see https://hub.docker.com/_/debian?tab=tags
 ---
-from: 'debian:stable-20211115-slim'
+from: 'debian:stable-20220711-slim'
 major: 0
 minor: 0
 patch: 1

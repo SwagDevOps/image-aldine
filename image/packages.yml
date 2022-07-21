@@ -1,6 +1,7 @@
 ---
 apt:
   - cairosvg
+  - imagemagick
   - tex-common
   - lmodern
   - texlive-fonts-recommended
@@ -12,8 +13,8 @@ apt:
   - libxml2
   - librsvg2-2
   - less
-  - rake
   - rsync
   - ruby
   - inotify-tools
   - pandoc
+  - git
