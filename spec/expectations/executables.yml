@@ -34,16 +34,6 @@
     executable:
     owned_by: [ 'root' ]
     grouped_into: [ 'root' ]
-    linked_to: [ 'magick' ]
-/usr/bin/magick:
-  is:
-    file:
-    executable:
-    owned_by: [ 'root' ]
-    grouped_into: [ 'root' ]
-    mode: [ 755 ]
-  version:
-    matcher: '^Version: ImageMagick 7\.0\.10-38 .*'
 /usr/bin/rsvg-convert:
   is:
     file:

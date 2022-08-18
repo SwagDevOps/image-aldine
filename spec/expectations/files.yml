@@ -13,21 +13,21 @@
     linked_to: [ 'bash/bashrc.sh' ]
     owned_by: [ 'root' ]
     grouped_into: [ 'root' ]
-/etc/ImageMagick-7:
+/etc/ImageMagick-6:
   is:
     directory:
     owned_by: [ 'root' ]
     grouped_into: [ 'root' ]
     mode: [ 755 ]
-/etc/ImageMagick-7/policy.xml:
-  md5sum: 'd2f6cc31d72d6f3263c5c2201af74ec8'
+/etc/ImageMagick-6/policy.xml:
+  md5sum: 'faed773d7bbcf639e2631a0f7cb5e6ce'
   is:
     file:
     owned_by: [ 'root' ]
     grouped_into: [ 'root' ]
     mode: [ 644 ]
-/etc/ImageMagick-7/delegates.xml:
-  md5sum: '1fe2ad9c47f9c775c8cda5035fff4d5d'
+/etc/ImageMagick-6/delegates.xml:
+  md5sum: '00f88a4ce8130b4dd764e8926289b26a'
   is:
     file:
     owned_by: [ 'root' ]
