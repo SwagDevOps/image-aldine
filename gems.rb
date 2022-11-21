@@ -1,17 +1,16 @@
 # frozen_string_literal: true
 
 # ```sh
-# bundle config set clean 'true'
-# bundle config set path 'vendor/bundle'
+# bundle config set --local clean 'true'
+# bundle config set --local path 'vendor/bundle'
 # bundle install
 # ```
-source 'https://rubygems.org'
-git_source(:github) { |name| "https://github.com/#{name}.git" }
+
+"#{File.dirname(__FILE__)}/dev/gems_helper.rb"
+  .tap { |file| self.instance_eval(File.read(file), file, 1) }
 
 group :default do
-  { github: 'SwagDevOps/kamaze-docker_image', branch: 'develop' }.tap do |options|
-    gem(*['kamaze-docker_image'].concat([options]))
-  end
+  github('SwagDevOps/kamaze-docker_image', { branch: 'develop' })
 
   gem 'kamaze-version', '~> 1.0'
   gem 'rake', '~> 13.0'
@@ -19,9 +18,7 @@ group :default do
 end
 
 group :development do
-  { github: 'SwagDevOps/kamaze-project', branch: 'develop' }.tap do |options|
-    gem(*['kamaze-project'].concat([options]))
-  end
+  github('SwagDevOps/kamaze-project', { branch: 'develop' })
 
   gem 'rubocop', '~> 1.3'
   gem 'rugged', '~> 1.0'
@@ -32,6 +29,8 @@ group :development do
 end
 
 group :test do
+  github('SwagDevOps/specinfra', { branch: 'fix/docker_finalize_container' })
+
   gem 'docker-api', '~> 2.0'
   gem 'rspec', '~> 3.10'
   gem 'serverspec', '~> 2.41'
