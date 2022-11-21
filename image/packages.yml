@@ -1,5 +1,6 @@
 ---
 apt:
+  - build-essential
   - cairosvg
   - imagemagick
   - tex-common
@@ -15,6 +16,7 @@ apt:
   - less
   - rsync
   - ruby
+  - ruby-dev
   - inotify-tools
   - pandoc
   - git
