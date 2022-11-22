@@ -29,8 +29,6 @@ group :development do
 end
 
 group :test do
-  github('SwagDevOps/specinfra', { branch: 'fix/docker_finalize_container' })
-
   gem 'docker-api', '~> 2.0'
   gem 'rspec', '~> 3.10'
   gem 'serverspec', '~> 2.41'
