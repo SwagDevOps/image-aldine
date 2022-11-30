@@ -6,6 +6,7 @@ apt:
   - tex-common
   - lmodern
   - texlive-fonts-recommended
+  - texlive-fonts-extra
   - texlive-latex-extra
   - texlive-lang-french
   - texlive-extra-utils
