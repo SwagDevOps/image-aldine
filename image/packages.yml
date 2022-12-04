@@ -1,6 +1,7 @@
 ---
 apt:
   - build-essential
+  - curl
   - cairosvg
   - imagemagick
   - tex-common
