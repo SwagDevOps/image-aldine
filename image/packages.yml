@@ -6,9 +6,12 @@ apt:
   - imagemagick
   - tex-common
   - lmodern
+  - texlive-base
+  - texlive-latex-recommended
   - texlive-fonts-recommended
-  - texlive-fonts-extra
   - texlive-latex-extra
+  - texlive-fonts-extra
+  - texlive-lang-english
   - texlive-lang-french
   - texlive-extra-utils
   - imagemagick
