@@ -33,7 +33,17 @@ RUN set -eux ;\
     #{GEM_INSTALL} bundler ;\
     # remove caches ----------------------------------------------------
     apt-get -y clean autoclean ;\
-    rm -rf /var/lib/apt/lists/* /var/cache/* /tmp/* /var/tmp/*
+    rm -rf /var/lib/apt/lists/* /var/cache/* /tmp/* /var/tmp/* ;\
+    # additional clean -------------------------------------------------
+    rm -rf /var/log/apt/ /var/log/alternatives.log /var/log/dpkg.log /var/log/fontconfig.log ;\
+    (path=/usr/share/X11/locale/; (ls "$path" || :)| grep -Ev '^C$' | while read dir; do rm -rf "$path""$dir"; done); \
+    rm -rf /usr/share/doc/ \
+        /usr/share/texlive/*.html \
+        /usr/share/texlive/readme-*.dir/ \
+        /usr/share/texlive/texmf-dist/doc/ \
+        /usr/share/texlive/README \
+        /usr/share/texlive/README.* \
+        /usr/share/texlive/LICENSE.*
 
 COPY files/ /
 
@@ -41,7 +51,9 @@ RUN set -eux ;\
     # set access -------------------------------------------------------
     chmod 644 /etc/bash/bashrc.sh ;\
     chmod 755 /etc/ImageMagick-*/ ;\
-    chmod 644 /etc/ImageMagick-*/*.xml
+    chmod 644 /etc/ImageMagick-*/*.xml ;\
+    # banner -----------------------------------------------------------
+    tlmgr --version
 
 # Local Variables:
 # mode: Dockerfile
