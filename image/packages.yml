@@ -11,6 +11,7 @@ apt:
   - texlive-fonts-recommended
   - texlive-latex-extra
   - texlive-fonts-extra
+  - texlive-bibtex-extra
   - texlive-lang-english
   - texlive-lang-french
   - texlive-extra-utils
